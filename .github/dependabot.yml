@@ -1,0 +1,7 @@
+# Dependabot 依赖保活。本仓只有 GitHub Actions 与文档构建，无应用依赖。
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
