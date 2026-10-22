@@ -23,7 +23,9 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  # 文档站只关心最新一版：连续推送时把在跑的旧构建取消掉，别让发布在队列里
+  # 排成长队（实测每次 Pages 发布 2~5 分钟，串行排队会让线上滞后好几轮）。
+  cancel-in-progress: true
 
 jobs:
   build:
