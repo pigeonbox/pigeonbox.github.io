@@ -49,6 +49,11 @@ jobs:
 
       # 构建即门禁：VitePress 构建失败（死链、语法错、include 路径失效）则不发布
       - name: 构建文档站
+        env:
+          # 「版本发布说明」页的数据源 = hub 仓的 Release（trainctl 生成的列车 notes）。
+          # 本仓自带的 GITHUB_TOKEN 只能读本仓，跨仓读 hub 要用 org 级 PB_BOT_TOKEN；
+          # 匿名请求会撞 GitHub API 限流(403)，故必须带 token。
+          GITHUB_TOKEN: ${{ secrets.PB_BOT_TOKEN }}
         run: npm run docs:build
         working-directory: hub/docs-site
 
